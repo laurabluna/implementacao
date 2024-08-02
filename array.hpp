@@ -1,35 +1,173 @@
 #ifndef __ARRAY_LIST_IFRN__
 #define __ARRAY_LIST_IFRN__
+#include "array.hpp";
+#include <iostream>;
+
 class array_list {
-private:
-int* data;
-unsigned int size_, capacity_;
-void increase_capacity() {}
-public:
-array_list() {} // Construtor
-~array_list() {} // Destrutor
-unsigned int size() {} // Retorna a quantidade de elementos armazenados
-unsigned int capacity() {} // Retorna o espaço reservado para armazenar os elementos
-double percent_occupied() {} // Retorna um valor entre 0.0 a 1.0 com o percentual da
+    private:
+        int *data;
+        unsigned int tamanho_;
+        unsigned int capacidade_ //aumentar a capacidade do array quando ele estiver cheio
+        void aumentar_capacidade() {
+            int *array_novo = new int[capacidade_ * 2];
+            for (int i = 0; i < tamanho_; i++) {
+                array_novo[i] = this->data[i];
+            }
+        }
+        delete[] this->data;
+        this->data = array_novo;
+        capacidade_ = capacidade_ *2;
+}
 
-// memória usada.
+    public: 
+        array_list() { //construtor
+            tamanho_ = 0;
+            capacidade_ = 100;
+            data = new int[capacidade_];
+        }
 
-bool insert_at(unsigned int index, int value) {} // Insere elemento no índice index
-bool remove_at(unsigned int index) {} // Remove elemento do índice index
-int get_at(unsigned int index) {} // Retorna elemento no índice index,
+        ~array_list() {
+            delete[] data;
+        }
 
-// −1 se índice inválido
+        unsigned int tamanho() {
+                return tamanho_; 
+        }
 
-void clear() {} // Remove todos os elementos, deixando o vetor no estado inicial
-void push_back(int value) {} // Adiciona um elemento no ``final'' do vetor
-void push_front(int value) {} // Adiciona um elemento no ``início'' do vetor
-bool pop_back() {} // Remove um elemento do ``final'' do vetor
-bool pop_front() {} // Remove um elemento do ``início'' do vetor
-int back(){} // Retorna o elemento do ``final'' do vetor
-int front(){} // Retorna o elemento do ``início'' do vetor
-bool remove(int value) {} // Remove value do vetor caso esteja presente
-int find(int value) {} // Retorna o índice de value, −1 caso value não esteja presente
-int count(int value) {} // Retorna quantas vezes value occorre no vetor
-int sum() {} // Retorna a soma dos elementos do vetor
-};
-#endif // __ARRAY_LIST_IFRN__
+        unsigned int capacidade() {
+                return capacidade_;
+        }
+
+        double percentual_ocupado() {
+                double percentual = tamanho_/capacidade_;
+                return percentual;
+        }
+
+        bool inserir_em(unsigned int index, int valor) {
+            if (tamanho_ == capacidade_) {
+                aumentar_capacidade();
+            }
+
+            if(index < tamanho_) {
+                for(int i = tamanho_; i > index; i-- ) {
+                    data[i] = data[i - 1];
+                }
+                data[index] = valor;
+                tamanho_++;
+                return true;
+            }
+            return false;
+
+        }
+
+        bool remover(unsigned int index) {
+            if(index < tamanho_) {
+                for(int i = index; i < tamanho_; i++) {
+                    data[i] = data[i + 1];
+                }
+                tamanho_--;
+                return true;
+            }
+            return false;
+        }
+
+        int pegar(unsigned int index) {
+            if(index > tamanho_) {
+                return data[index];
+                return -1;
+            }
+        }
+
+        void clear() {
+            tamanho_ = 0;
+        }
+
+        void push_back(int valor) {
+            if(tamanho_ == capacidade_) {
+                aumentar_capacidade();
+                data[tamanho_++] = valor;
+            }
+        }
+
+        void push_front(int valor) {
+            if(tamanho_ == capacidade_) {
+                aumentar_capacidade();
+                for(int i = tamanho_; i > 0; i--){
+                    data[i] = data[i-1];
+                data[0] = valor;
+                tamanho_++;
+                }
+            }
+        }
+
+        bool pop_back() {
+            if(tamanho_ > 0) {
+                tamanho_--;
+                return true;
+            }
+            return false;
+        }
+
+        bool pop_front() {
+            if(tamanho_ > 0)b  {
+                for(int i = 0; i < tamanho_-1: ++i) {
+                data[i] = data[i+1];
+            }
+            tamanho_--;
+            return true;
+            }
+            return false; 
+        }
+
+        int back() {
+            return data[tamanho_ -1];
+        }
+
+        int front() {
+            return data[0];
+        }
+
+        bool remover(int valor)  {
+            for(int i = 0; i < tamanho_; i++) {
+                if(valor == data[i]) {
+                    for(int j = i; j < tamanho_-1; j++) {
+                        data[j] = data[j+1];
+                    }
+                    tamanho_--;
+                    return true;;
+                }
+            }
+            return false;
+        }
+
+        int find(int valor) {
+            for(int i = 0; i < tamanho_; i++){
+                if(valor == data[i]) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        int count(int valor) {
+            int quantidade = 0;
+            for(int i = 0; i < tamanho_; i++) {
+                if(data[i] == valor) {
+                    quantidade++;
+                }
+            }
+            return quantidade;
+        }
+
+        int sum() {
+            int soma = 0;
+            for(int i = 0; i < tamanho_; i++) {
+                soma+=data[i];
+            }
+            return soma;
+        }
+        
+        
+
+
+#endif;

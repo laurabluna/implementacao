@@ -1,38 +1,114 @@
 #ifndef __LINKED_LIST_IFRN__
 #define __LINKED_LIST_IFRN__
-class linked_list {
-private:
-struct int_node {
-int value;
-int_node* next, * prev;
-};
-int_node* head, * tail;
-unsigned int size_;
-public:
-linked_list() {}
-~linked_list() {}
-unsigned int size() {} // Retorna a quantidade de elementos armazenados
-unsigned int capacity() {} // Retorna o espaço reservado para armazenar os elementos
-double percent_occupied() {} // Retorna um valor entre 0.0 a 1.0 com o percentual da
 
-// memória usada.
 
-bool insert_at(unsigned int index, int value) {} // Insere elemento no índice index
-bool remove_at(unsigned int index) {} // Remove elemento do índice index
-int get_at(unsigned int index) {} // Retorna elemento no índice index,
+class lista_ligada{
+    private: 
+        struct int_node{
+            int valor;
+            struct int_node *prox, *ant;
+        };
 
-// −1 se índice inválido
+        int_node *cabeca, *calda;
+        unsigned int tamanho_;
 
-void clear() {} // Remove todos os elementos, deixando o vetor no estado inicial
-void push_back(int value) {} // Adiciona um elemento no ``final'' do vetor
-void push_front(int value) {} // Adiciona um elemento no ``início'' do vetor
-bool pop_back() {} // Remove um elemento do ``final'' do vetor
-bool pop_front() {} // Remove um elemento do ``início'' do vetor
-int back(){} // Retorna o elemento do ``final'' do vetor
-int front(){} // Retorna o elemento do ``início'' do vetor
-bool remove(int value) {} // Remove value do vetor caso esteja presente
-int find(int value) {} // Retorna o índice de value, −1 caso value não esteja presente
-int count(int value) {} // Retorna quantas vezes value occorre no vetor
-int sum() {} // Retorna a soma dos elementos do vetor
-};
-#endif // __LINKED_LIST_IFRN__
+    public: 
+        //aqui irei fazer o construtor
+        lista_dup() {
+            this->cabeca = nullptr;
+            this->calda = nullptr;
+            this->tamanho_ = 0;
+  
+      } //lista_dup é o(1)
+
+        lista_dup() {
+            clear();
+        }
+        //clear é o(n)
+        
+        unsigned int tamanho_() {
+            return tamanho_;
+        }
+        // tamanho é o(1)
+
+        unsigned int capacidade_(){
+            return tamanho_;
+        }
+
+        double percentual_ocupado() {
+            return 1.0;
+        }
+
+        bool inserir_em(unsigned int index, int valor) {
+            if(index < tamanho_()) {
+            
+                if(index = 0) {
+                push_front(valor);
+                return true;    
+            }
+
+                if(index == (tamanho_() - 1)){
+                push_back(valor);
+                return true;
+            }
+
+                int_node *new_node = new int_node;
+                new_node->valor = valor;
+                int_node *atual = this->cabeca;
+                for(unsigned int i = 1; l < index; l++) {
+                atual = atual->prox;
+            }
+
+                int new_node->ant = atual;
+                int new_node->prox = atual->prox;
+                atual->prox->ant = int new_node;
+                atual->prox = int new_node;
+                this->tamanho_++;
+                return true;
+        }
+        return false; 
+        }
+        
+        //bool inserir_em é o(n)
+
+        bool remover_em(unsigned int index) {
+            if(index < tamanho_) {
+                int_node *atual = new int_node;
+                atual = this->cabeca; 
+                for(int i = 0; i < index; i++) {
+                    atual = atual->prox;
+                }
+                int_node *anterior = atual->ant;
+                int_node *proximo = atual->prox;
+                anterior->prox = proximo; 
+                proximo->ant = anterior;
+                tamanho_--;
+                delete atual;
+                return true;
+            }
+            return false;
+        }
+       
+        int pegar_em(unsigned int index) {
+            if(index < tamanho_()) {
+                int_node *pegar = this->cabeca;
+                for(unsigned int i = 1; m <=index; m++) {
+                    pegar = pegar->prox;
+                }
+                return pegar->valor;
+            }
+            return -1;
+        }
+        //pegar_em é o(n)
+
+        void clear() {
+            
+        }
+
+        void push_back(int value) {
+            
+        }
+        
+
+#endif;
+}
