@@ -18,19 +18,19 @@ public:
         this->calda = nullptr;
         this->tamanho_ = 0;
     }
-
+//lista ligada é o(1)
     ~lista_ligada() {
         clear();
     }
-
+//~lista ligada é o(n)
     unsigned int tamanho() {
         return tamanho_;
     }
-
+//tamanho é o(1)
     double percentual_ocupado() {
         return 1.0;
     }
-
+//percentual é o(1)
     bool inserir_em(unsigned int index, int valor) {
         if (index > tamanho_) {
             return false;
@@ -64,7 +64,7 @@ public:
         tamanho_++;
         return true;
     }
-
+//inserir em é o(n)
     bool remover_em(unsigned int index) {
         if (index >= tamanho_) {
             return false;
@@ -91,7 +91,7 @@ public:
         tamanho_--;
         return true;
     }
-
+//remover em é o(n)
     int pegar_em(unsigned int index) {
         if (index >= tamanho_) {
             return -1;
@@ -104,7 +104,7 @@ public:
 
         return pegar->valor;
     }
-
+//pegar em é o(n)
     void clear() {
         int_node *atual = cabeca;
         while (atual != nullptr) {
@@ -116,7 +116,7 @@ public:
         calda = nullptr;
         tamanho_ = 0;
     }
-
+//clear é o(n)
     void push_back(int valor) {
         int_node *new_node = new int_node;
         new_node->valor = valor;
@@ -132,7 +132,7 @@ public:
         calda = new_node;
         tamanho_++;
     }
-
+//push_back é o(1)
     void push_front(int valor) {
         int_node *new_node = new int_node;
         new_node->valor = valor;
@@ -148,7 +148,7 @@ public:
         cabeca = new_node;
         tamanho_++;
     }
-
+//push_front é o(1)
     bool pop_back() {
         if (!cabeca) {
             return false;
@@ -169,7 +169,7 @@ public:
         tamanho_--;
         return true;
     }
-
+//pop back é o(1)
     bool pop_front() {
         if (tamanho_ == 0) {
             return false;
@@ -188,15 +188,15 @@ public:
         tamanho_--;
         return true;
     }
-
+//pop_front é o(1)
     int back() {
         return calda->valor;
     }
-
+//back é o(1)
     int front() {
         return cabeca->valor;
     }
-
+//front é o(1)
     bool remove(int valor) {
         int_node *node = cabeca;
         while (node != nullptr) {
@@ -221,7 +221,7 @@ public:
         }
         return false;
     }
-
+//bool remove é o(n)
     int find(int valor) {
         int_node *node = cabeca;
         for (int i = 0; i < tamanho_; i++) {
@@ -232,7 +232,7 @@ public:
         }
         return -1;
     }
-
+//find é o(n)
     int count(int valor) {
         int quantidade = 0;
         int_node *node = cabeca;
@@ -244,7 +244,7 @@ public:
         }
         return quantidade;
     }
-
+//count é o(n)
     int soma() {
         int soma = 0;
         int_node *node = cabeca;
@@ -254,7 +254,7 @@ public:
         }
         return soma;
     }
-
+//soma é o(n)
 };
 
 #endif // __LINKED_LIST_IFRN__
