@@ -198,29 +198,29 @@ public:
     }
 //front é o(1)
     bool remove(int valor) {
-        int_node *node = cabeca;
-        while (node != nullptr) {
-            if (node->valor == valor) {
-                if (node->ant) {
-                    node->ant->prox = node->prox;
-                } else {
-                    cabeca = node->prox;
-                }
-
-                if (node->prox) {
-                    node->prox->ant = node->ant;
-                } else {
-                    calda = node->ant;
-                }
-
-                delete node;
-                tamanho_--;
-                return true;
+    int_node *node = cabeca;
+    while (node != nullptr) {
+        if (node->valor == valor) {
+            if (node->ant) {
+                node->ant->prox = node->prox;
+            } else {
+                cabeca = node->prox;
             }
-            node = node->prox;
+
+            if (node->prox) {
+                node->prox->ant = node->ant;
+            } else {
+                calda = node->ant;
+            }
+
+            delete node;
+            tamanho_--;
+            return true;
         }
-        return false;
+        node = node->prox;
     }
+    return false;
+}
 //bool remove é o(n)
     int find(int valor) {
         int_node *node = cabeca;
