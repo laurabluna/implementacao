@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include "array.hpp"
+#include "arraylist.hpp"
 
 int main() {
     unsigned int n;
@@ -36,4 +36,4 @@ int main() {
         << removed << " remove_at success : "
         << elapsed.count() << std::endl;
     return 0;
-}
+};
